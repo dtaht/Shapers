@@ -1,0 +1,9 @@
+* Shapers - an attempt to modernize multiple network traffic shapers
+
+(without changing their logic very much)
+
+** Wondershaper
+** ADSL-optimizer
+** DRR
+** NPMAP
+

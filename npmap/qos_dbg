@@ -1,0 +1,12 @@
+#!/bin/sh
+# Debug code in place
+. ./functions.sh
+. ./qos.conf
+
+DEBUG_LOG=/tmp/npmap_qos.$$
+
+case $1 in 
+    up|start) qos_start ;;
+    down|stop) qos_stop ;;
+    help) help;;
+esac
