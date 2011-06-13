@@ -68,11 +68,11 @@ classes_setup() {
     tc qdisc add dev $IFACE root handle 1:0 htb default 203 r2q 50
     tc class add dev $IFACE parent 1:0 classid 1:1 htb rate $UPRATE burst $BURST cburst $CBURST1 overhead 20
 
-    tc class add dev $IFACE parent 1:1 classid 1:200 htb rate $PRIORATE0 ceil $PRIOICMP cburst $CBURST0 prio 0 mtu 1492
-    tc class add dev $IFACE parent 1:1 classid 1:201 htb rate $PRIORATE1 ceil $UPRATE cburst $CBURST1 prio 1 mtu 1492
-    tc class add dev $IFACE parent 1:1 classid 1:202 htb rate $PRIORATE2 ceil $UPRATE cburst $CBURST2 prio 2 mtu 1492
-    tc class add dev $IFACE parent 1:1 classid 1:203 htb rate $PRIORATE3 ceil $UPRATE cburst $CBURST3 prio 3 mtu 1492
-    tc class add dev $IFACE parent 1:1 classid 1:204 htb rate $PRIORATE4 ceil $UPRATE cburst $CBURST4 prio 4 mtu 1492
+    tc class add dev $IFACE parent 1:1 classid 1:200 htb rate $PRIORATE0 ceil $PRIOICMP cburst $CBURST0 prio 0 mtu $MTU
+    tc class add dev $IFACE parent 1:1 classid 1:201 htb rate $PRIORATE1 ceil $UPRATE cburst $CBURST1 prio 1 mtu $MTU
+    tc class add dev $IFACE parent 1:1 classid 1:202 htb rate $PRIORATE2 ceil $UPRATE cburst $CBURST2 prio 2 mtu $MTU
+    tc class add dev $IFACE parent 1:1 classid 1:203 htb rate $PRIORATE3 ceil $UPRATE cburst $CBURST3 prio 3 mtu $MTU
+    tc class add dev $IFACE parent 1:1 classid 1:204 htb rate $PRIORATE4 ceil $UPRATE cburst $CBURST4 prio 4 mtu $MTU
 }
 
 # filters
