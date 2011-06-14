@@ -10,6 +10,8 @@ tc qdisc del dev $IFACE root
 
 qos_init() {
 (
+insmod act_police
+insmod sch_ingress
 insmod cls_fw
 insmod sch_esfq
 insmod sch_htb
@@ -20,7 +22,7 @@ insmod ipt_CONNMARK
 insmod sch_dsmark ) 2> /dev/null
 }
 
-	
+
 chains_setup() {
 for iptables in iptables ip6tables
 do
@@ -93,13 +95,19 @@ qdisc_esfq_setup() {
     tc qdisc add dev $IFACE parent 1:204 esfq perturb 10
 }
 
+qos_ingress_setup() {
+    tc qdisc add dev $IFACE handle ffff: ingress
+    tc filter add dev $IFACE parent ffff: protocol ip prio 50 u32 match ip src 0.0.0.0/0 police rate $DOWNRATE burst 10k drop flowid :1
+}
+
 qos_start() {
 	qos_reset
 	qos_init
 	chains_setup
 	classes_setup
 	filters_setup
-	qdisc_esfq_setup	
+	qdisc_esfq_setup
+	qos_ingress_setup
 }
 
 qos_stop() {
